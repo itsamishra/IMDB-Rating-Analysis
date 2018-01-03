@@ -7,7 +7,7 @@ import math
 def initiateDb():
 	connection = sqlite3.connect("movies.db")
 	cursor = connection.cursor()
-	cursor.execute("CREATE TABLE IF NOT EXISTS ratingUrl(Name TEXT, ratingUrl TEXT)")
+	cursor.execute("CREATE TABLE IF NOT EXISTS ratingUrl(Name TEXT, ratingUrl TEXT, One INTEGER, Two INTEGER, Three INTEGER, Four INTEGER, Five INTEGER, Six INTEGER, Seven INTEGER, Eight INTEGER, Nine INTEGER, Ten INTEGER)")
 	
 	cursor.close()
 	connection.close()
@@ -17,7 +17,7 @@ def insertDb(name, url):
 	name = name.replace("'","''")
 	connection = sqlite3.connect("movies.db")
 	cursor = connection.cursor()
-	command = "INSERT INTO ratingUrl VALUES ('" + str(name) + "','" + str(url) + "')"
+	command = "INSERT INTO ratingUrl(Name,ratingUrl) VALUES ('" + str(name) + "','" + str(url) + "')"
 	cursor.execute(command)
 	connection.commit()
 
