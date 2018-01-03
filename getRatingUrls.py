@@ -32,13 +32,14 @@ def main(numMovies):
 	# Creates db and table if they don't already exist
 	initiateDb()
 
-	
 	maxPage = math.ceil(numMovies/50)
+
+	# Iterates over pages contining list of movies
 	for pageName in range(1,maxPage+1):
+		# Gets page html
 		pageUrl = urlTemplate + str(pageName)
 		client = urlopen(pageUrl)
 		pageHtml = client.read()
-
 
 		# Parses HTML
 		pageSoup = soup(pageHtml, "html.parser")
@@ -48,12 +49,12 @@ def main(numMovies):
 
 		# Iterates over all movies on page
 		for movie in movieList:
-			# Gets url of movie's page
+			# Gets url of movies page
 			movieData = movie.findAll("h3", {"class":"lister-item-header"})[0].findAll("a")[0]
 			movieUrl = movieData["href"]
 			movieName = movieData.text
 
-			# Creates movie's rating url
+			# Creates movies rating url
 			ratingsUrl = "http://www.imdb.com"
 			for char in movieUrl:
 				if char!="?":
@@ -62,9 +63,8 @@ def main(numMovies):
 					ratingsUrl = ratingsUrl + "ratings"
 					break
 
-			#print(movieName, ratingsUrl)
+			# Inserts movie name and its rating url to database
 			insertDb(movieName,ratingsUrl)
-
 
 		client.close()
 
