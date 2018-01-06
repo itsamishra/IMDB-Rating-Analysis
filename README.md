@@ -1,2 +1,2 @@
 # IMDB-Rating-Analysis
-IMDB Rating Analysis
+An analysis of IMDB ratings.
