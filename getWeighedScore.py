@@ -8,7 +8,6 @@ def addScore(url, score):
 	cursor = connection.cursor()
 
 	command = "UPDATE ratingUrl SET weighedScore="+str(score)+" WHERE ratingUrl IS '"+str(url)+"'"
-	#print(command)
 	cursor.execute(command)
 	connection.commit()
 
